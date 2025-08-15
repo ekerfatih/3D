@@ -1,0 +1,92 @@
+@import "tailwindcss";
+
+body, html, #root {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    max-height: 100vh;
+    /*background: #050b1a;*/
+}
+
+.ref {
+    opacity: 0;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    display: block;
+    z-index: 1;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    line-height: 5rem;
+}
+
+button {
+    cursor: pointer;
+}
+
+button:hover {
+    color: white;
+}
+
+
+.inter {
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+
+/* region ripple css */
+
+.main {
+    width: 410px;
+    height: 410px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.wave {
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+    background: transparent;
+    border: 26px solid #071429;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: ripple 4s infinite ease-in;
+    filter: blur(13px);
+}
+
+.wave1 {
+}
+
+.wave2 {
+    width: 150%;
+    height: 150%;
+    animation-delay: .5s;
+}
+
+.wave3 {
+    width: 200%;
+    height: 200%;
+    animation-delay: 1s;
+}
+
+@keyframes ripple {
+    0% {
+        transform: translate(-50%, -50%) scale(0);
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0;
+    }
+    5% {
+        opacity: 1;
+    }
+}
+
+/* endregion */

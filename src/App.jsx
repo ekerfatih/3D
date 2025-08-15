@@ -10,6 +10,8 @@ import Contact from "./Components/Contact.jsx"; // ← eklendi
 import React, {useLayoutEffect, useRef, useState} from "react";
 import {gsap} from "gsap";
 import {CustomEase} from "gsap/CustomEase";
+import WaterCanvas from "./3DComponents/WaterCanvas.jsx";
+import WaterInternal from "./3DComponents/WaterInternal.jsx";
 
 gsap.registerPlugin(CustomEase);
 
@@ -18,6 +20,7 @@ function App() {
     const [isTransitioning, setIsTransitioning] = useState(false);
     const rootRef = useRef(null);
     const contentRef = useRef(null);
+    const [showSplash, setShowSplash] = useState(true);
 
     useLayoutEffect(() => {
         const el = contentRef.current;
@@ -78,22 +81,20 @@ function App() {
     return (
         <div ref={rootRef}
              className="relative min-h-screen w-full bg-gradient-to-b from-stone-900 to-black overflow-auto">
-            {/* 3D Canvas */}
             <div className="absolute inset-0 z-0 h-full pointer-events-auto">
                 <Canvas
-                    camera={{position: [0, 0.6, 10], fov: 50, near: 0.1, far: 550, rotation: [0.25, 0, 0]}}
-                    style={{background: "transparent"}}
+                    camera={{ position: [0, 0.6, 10], fov: 50, near: 0.1, far: 550, rotation: [0.25, 0, 0] }}
+                    style={{ background: "transparent" }}
                 >
-                    <WaveDots/>
-                    <DraggableCube height={3}/>
+                    <WaveDots />
+                    <DraggableCube height={3} />
                 </Canvas>
             </div>
 
-            {/* NAV */}
             <div className="flex justify-between absolute right-[5%] top-[5%] z-50 pointer-events-auto">
                 <div className="text-white text-2xl"></div>
                 <nav className="flex items-center text-gray-400 text-2xl gap-8">
-                    {["Home", "About", "Resume", "Projects", "Contact"].map(label => ( // ← Contact menüde
+                    {["Home", "About", "Resume", "Projects", "Contact"].map(label => (
                         <button
                             key={label}
                             type="button"
@@ -114,7 +115,9 @@ function App() {
                 </nav>
             </div>
 
-            {/* CONTENT: dikey ortalı, sola yakın */}
+            {showSplash && (
+                <WaterInternal onFinish={() => setShowSplash(false)} />
+            )}
             <div className="relative z-10 w-[70%]">
                 <section
                     className="min-h-screen flex items-center justify-start pl-20 pr-8 pb-16 relative pointer-events-none overflow-hidden">

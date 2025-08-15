@@ -55,12 +55,12 @@ const Drop = ({active}) => {
         if (!ref.current || !materialRef.current) return;
 
         // Eğer damla yere değmediyse
-        if (ref.current.position.y > -2 && active) {
+        if (ref.current.position.y > -50 && active) {
             velocity.current += acceleration;
             ref.current.position.y += velocity.current;
 
-            if (ref.current.position.y <= -2) {
-                ref.current.position.y = -2;
+            if (ref.current.position.y <= -50) {
+                ref.current.position.y = -50;
                 velocity.current = 0;
             }
         }
